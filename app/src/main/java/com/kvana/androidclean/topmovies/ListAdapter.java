@@ -1,6 +1,8 @@
 package com.kvana.androidclean.topmovies;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +50,27 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ListItemViewHo
         public TextView itemName;
         public TextView countryName;
 
+        int currentItem;
+
+
         public ListItemViewHolder(View itemView) {
             super(itemView);
             itemName = (TextView) itemView.findViewById(R.id.textView_fragmentlist_task_name);
             countryName = (TextView) itemView.findViewById(R.id.textView_fragmentlist_country_name);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    int position = getAdapterPosition();
+                    Log.i("RECYCLER CLICK", "Clicked on position:" + position + " Movie Name:" + itemName.getText().toString() );
+
+                    Snackbar.make(view, "Click detected on item:" + position + " Film Name: " + itemName.getText().toString(),
+                            Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+
+                }
+            });
         }
     }
 }
